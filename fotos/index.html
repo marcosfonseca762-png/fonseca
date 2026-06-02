@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NossaFlix</title>
+    <style>
+        /* Estilos Globais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #111;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Barra de Navegação */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 4%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, transparent 100%);
+            z-index: 10;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            color: #E50914;
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-decoration: none;
+        }
+
+        /* Banner de Destaque */
+        .banner {
+            position: relative;
+            height: 70vh;
+            background: linear-gradient(to top, #111 0%, rgba(0,0,0,0.3) 100%), 
+                        url('sua-foto-principal.jpg') no-repeat center center / cover;
+            display: flex;
+            align-items: center;
+            padding-left: 4%;
+        }
+
+        .banner-content {
+            max-width: 600px;
+        }
+
+        .banner-title {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .banner-description {
+            font-size: 1.2rem;
+            line-height: 1.4;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .btn-play {
+            background-color: #fff;
+            color: #000;
+            border: none;
+            padding: 10px 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-play:hover {
+            background-color: rgba(255,255,255,0.75);
+        }
+
+        /* Fileiras de Vídeos */
+        .row {
+            padding: 20px 0 20px 4%;
+        }
+
+        .row-title {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .row-posters {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 10px 0;
+        }
+
+        /* Remove a barra de rolagem visualmente */
+        .row-posters::-webkit-scrollbar {
+            display: none;
+        }
+
+        .poster-container {
+            position: relative;
+            flex-shrink: 0;
+            width: 200px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .poster-container:hover {
+            transform: scale(1.08);
+            z-index: 2;
+        }
+
+        .poster-img {
+            width: 100%;
+            border-radius: 4px;
+            display: block;
+        }
+
+        .poster-title {
+            margin-top: 5px;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        /* Modal para assistir ao vídeo */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.95);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            position: relative;
+            width: 80%;
+            max-width: 800px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -40px; right: 0;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        video {
+            width: 100%;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navegação -->
+    <nav class="navbar">
+        <a href="#" class="logo">NOSSAFLIX</a>
+    </nav>
+
+    <!-- Banner Principal -->
+    <header class="banner" id="mainBanner">
+        <div class="banner-content">
+            <h1 class="banner-title">Nossa História de Amor</h1>
+            <p class="banner-description">Temporada 1 disponível. Assista aos nossos melhores momentos, viagens e risadas juntos.</p>
+            <button class="btn-play" onclick="openModal('videos/video-principal.mp4')">Assistir</button>
+        </div>
+    </header>
+
+    <!-- Categoria 1 -->
+    <div class="row">
+        <h2 class="row-title">Nossas Viagens</h2>
+        <div class="row-posters">
+            
+            <!-- Item 1 -->
+            <div class="poster-container" onclick="openModal('videos/viagem2.mp4')">
+                <img src="fotos/capa4.jpg" alt="Viagem 1" class="poster-img">
+                <div class="poster-title">Férias na Praia</div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="poster-container" onclick="openModal('videos/viagem4.mp4')">
+                <img src="fotos/capa2.jpg" alt="Viagem 2" class="poster-img">
+                <div class="poster-title">Fim de Semana Especial</div>
+            </div>
+
+            <!-- Adicione mais itens copiando a estrutura acima -->
+
+        </div>
+    </div>
+
+    <!-- Categoria 2 -->
+    <div class="row">
+        <h2 class="row-title">Momentos Engraçados</h2>
+        <div class="row-posters">
+            <div class="poster-container" onclick="openModal('videos/comedia1.mp4')">
+                <img src="fotos/capa3.jpg" alt="Momento 1" class="poster-img">
+                <div class="poster-title">A Surpresa</div>
+            </div>
+            <!-- Item 1 -->
+            <div class="poster-container" onclick="openModal('videos/viagem5.mp4')">
+                <img src="fotos/capa5.jpg" alt="Viagem 1" class="poster-img">
+                <div class="poster-title">Filmes Romáticos</div>
+                 <div class="poster-container" onclick="openModal('videos/viagem6.mp4')">
+                <img src="fotos/capa6.jpg" alt="Viagem 1" class="poster-img">
+                <div class="poster-title">Continência ao Amor</div>
+
+        </div>
+    </div>
+
+    <!-- Player de Vídeo (Modal) -->
+    <div class="modal" id="videoModal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <video id="videoPlayer" controls></video>
+        </div>
+    </div>
+
+    <!-- Script para controlar os vídeos -->
+    <script>
+        const modal = document.getElementById('videoModal');
+        const videoPlayer = document.getElementById('videoPlayer');
+
+        function openModal(videoSrc) {
+            videoPlayer.src = videoSrc;
+            modal.style.display = 'flex';
+            videoPlayer.play();
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+            videoPlayer.pause();
+            videoPlayer.src = '';
+        }
+
+        // Fecha o modal se clicar fora do vídeo
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
